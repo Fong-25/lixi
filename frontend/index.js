@@ -1,4 +1,4 @@
-const list = [2000, 2025, 2025, 3000, 3000, 4000, 5000, 10000, 15000];
+const list = [2000, 2025, 2025, 3000, 3000, 5000, 5000, 5000, 10000, 15000];
 const amount = document.getElementById('amount');
 
 const envelope = document.querySelector('.envelope-wrapper');
