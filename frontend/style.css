@@ -137,3 +137,9 @@ input:focus{
     font-size: 12px;
     font-family: 'Roboto', 'Inter', sans-serif;
 }
+
+#maintainance{
+    translate:0 30vh;
+    color:var(--txt-color);
+    font-family: 'Roboto', 'Inter', sans-serif;
+}

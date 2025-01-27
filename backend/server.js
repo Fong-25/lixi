@@ -56,3 +56,7 @@ app.get('/admin12345', async (req, res) => {
     res.status(500).json({ error: 'Error!!!' });
   }
 });
+
+app.get('/404', (req, res) =>{
+  res.sendFile(path.join(__dirname, '../frontend', '404.html'));
+})
