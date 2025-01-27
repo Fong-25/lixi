@@ -1,3 +1,5 @@
+// backend/server.js
+
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
@@ -19,29 +21,30 @@ mongoose.connect(process.env.MONGODB_URI)
 
 // Schema
 const moneySchema = new mongoose.Schema({
-    name: {
-      type: String,
-      required: true
-    },
-    lucky: {
-      type: String,
-      required: true
-    },
-    timestamp: {
-      type: Date,
-      default: Date.now
-    }
+  name: {
+    type: String,
+    required: true
+  },
+  lucky: {
+    type: String,
+    required: true
+  },
+  timestamp: {
+    type: Date,
+    default: Date.now
+  }
 });
 const Money = mongoose.model('Money', moneySchema);
 
 // Serve static files (index.js, style.css, etc.) from the 'frontend' directory
 app.use(express.static(path.join(__dirname, '../frontend')));
+
 // Rendering HTML
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../frontend', 'index.html'));
 });
 
-//Routes
+// Routes
 app.post('/api/money', async (req, res) => {
     try {
       const { name, lucky } = req.body;
@@ -53,8 +56,19 @@ app.post('/api/money', async (req, res) => {
     }
 });
   
-
+// PORT
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
+
+const getList = async () => {
+  try {
+    const user = await Money.find();
+    console.log(user);
+  } catch(e){
+      console.log(e)
+  }
+}
+
+module.exports = {getList};

@@ -1,6 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 :root{
     --primary: #fff;
-    --bg-color: rgb(240, 212, 212);
+    --bg-color: rgb(236, 209, 209);
     --bg-envelope-color: red;
     --envelope-tab: rgb(236, 44, 44);
     --envelope-cover: rgb(228, 62, 62);
@@ -23,11 +24,12 @@ input{
     outline:none;
     border:1px solid #000;
     height:40px;
-    margin-top:20px;
+    margin-top:15px;
     width:230px;
     max-width:60%;
     border-radius:20px;
     padding:0 20px;
+    translate:0 10px
 }
 input:focus{
     border:1px solid rgb(207, 82, 82);
@@ -36,7 +38,6 @@ input:focus{
     height: 80vh;
     display: grid;
     place-items: center;
-    translate:0 15%;
 }
 .container > .envelope-wrapper {
     background: var(--bg-envelope-color);
@@ -82,10 +83,10 @@ input:focus{
     padding: 20px 10px;
 }
 .envelope > .letter > .text {
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-family: 'Roboto', 'Inter', sans-serif;
     color: var(--txt-color);
     text-align: left;
-    font-size: 10px;
+    font-size: 10px;    
 }
 .heart {
     position: absolute;
@@ -117,4 +118,22 @@ input:focus{
 .flap > .heart {
     transform: rotate(90deg);
     transition-delay: 0.4s;
+}
+.footer {
+    position: absolute;
+    background:rgb(214, 81, 81, 0.5);
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: left;
+    font-family: 'Roboto', 'Inter', sans-serif;
+    color: var(--txt-color);
+    font-size: 12px;
+    padding: 10px;
+}
+.footer > li {
+    color: black;
+    text-decoration: none;
+    font-size: 12px;
+    font-family: 'Roboto', 'Inter', sans-serif;
 }

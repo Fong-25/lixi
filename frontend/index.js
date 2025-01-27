@@ -1,4 +1,4 @@
-const list = [2025, 3000, 5000, 6000, 7000, 8000, 9000, 10000, 11000, 12000];
+const list = [2000, 2025, 2025, 3000, 3000, 4000, 5000, 10000, 15000];
 const amount = document.getElementById('amount');
 
 const envelope = document.querySelector('.envelope-wrapper');
@@ -28,15 +28,15 @@ envelope.addEventListener('click', async function(e) {
         });
         
         if (response.ok) {
-            alert('Sent successfully!');
+            alert('Sent!');
             // Clear form, reset animation
             document.getElementById('name').value = '';
             envelope.classList.remove('flap');
         } else {
-            throw new Error('Failed to send message');
+            throw new Error('Failed!');
         }
     } catch (error) {
-        alert('Error:' + error.message);
+        alert('Error: ' + error.message);
         envelope.classList.remove('flap');
     }
 });
