@@ -36,14 +36,13 @@ mongoose.connect(process.env.MONGODB_URI)
   .then(() => console.log('Connected to MongoDB'))
   .catch(err => console.error('MongoDB connection error:', err));
 
-
 // Schema
 const Money = require('./money.model');
 
 // Serve static files (index.js, style.css, etc.) from the 'frontend' directory
 app.use(express.static(path.join(__dirname, '../frontend')));
 
-// Rendering HTML after time gate
+// Apply time-gate middleware to main route only
 app.get('/', timeGateMiddleware, (req, res) => {
   res.sendFile(path.join(__dirname, '../frontend', 'index.html'));
 });
@@ -59,14 +58,8 @@ app.post('/api/money', timeGateMiddleware, async (req, res) => {
       res.status(500).json({ error: 'Error!!!' });
     }
 });
-  
-// PORT
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-});
 
-// Admin route is not time-gated
+// Admin route - not time-gated
 app.get('/admin12345', async (req, res) => {
   try {
     const money = await Money.find();
@@ -78,4 +71,10 @@ app.get('/admin12345', async (req, res) => {
 
 app.get('/404', (req, res) =>{
   res.sendFile(path.join(__dirname, '../frontend', '404.html'));
-})
+});
+
+// PORT
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+});
