@@ -1,19 +1,24 @@
-const list = [2000, 2025, 2025, 3000, 3000, 5000, 5000, 5000, 10000, 15000];
+const list1 = [2000, 2025, 2025, 3000, 5000, 5000, 5000, 5000, 10000, 20000];
+const list2 = ['Tết Dương lịch 2025, chúc bạn bình an, vui vẻ và gặp nhiều may mắn trong mọi việc!', 'Chúc bạn năm mới 2025 thật nhiều sức khỏe, niềm vui tràn ngập, và thành công như ý!', 'Chúc bạn năm 2025 thật nhiều tài lộc, sức khỏe dồi dào và mãi giữ được sự lạc quan, yêu đời!', 'Năm mới 2025, chúc tình bạn của chúng ta thêm bền chặt và bạn luôn đạt được những điều tốt đẹp nhất!', 'Chúc bạn năm mới vạn sự như ý, an khang thịnh vượng', 'Chúc năm mới 2025: An khang, Thịnh vượng, Hạnh phúc tràn đầy.', 'Chúc bạn năm mới sức khỏe dồi dào, công việc thăng tiến, cuộc sống hạnh phúc.', 'Chúc bạn một năm mới an lành, thịnh vượng và tràn ngập niềm vui.']
 const amount = document.getElementById('amount');
+const greeting = document.getElementById('greeting');
+
 
 const envelope = document.querySelector('.envelope-wrapper');
 envelope.addEventListener('click', async function(e) {
     e.preventDefault();
 
     const name = document.getElementById('name').value;
-    const index = Math.floor(Math.random() * list.length);
-    const lucky = list[index];
+    const index1 = Math.floor(Math.random() * list1.length);
+    const index2 = Math.floor(Math.random() * list2.length);
+    const lucky = list1[index1];
     if (!name){
-        alert('Please enter your name');
+        alert('Điền tên cái đã !!!');
         return;
     }
     try {
-        // Animate the envelope, put amount in it
+        // Animate the envelope, put amount and greeting in it
+        greeting.textContent = list2[index2];
         amount.textContent = `${lucky}`;
         envelope.classList.toggle('flap');
         // Wait for the animation to finish
@@ -28,12 +33,12 @@ envelope.addEventListener('click', async function(e) {
         });
         
         if (response.ok) {
-            alert('Sent!');
+            alert('Thành công!');
             // Clear form, reset animation
             document.getElementById('name').value = '';
             envelope.classList.remove('flap');
         } else {
-            throw new Error('Failed!');
+            throw new Error('Error, try again');
         }
     } catch (error) {
         alert('Error: ' + error.message);
