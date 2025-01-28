@@ -4,12 +4,76 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>404</title>
-    <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/jpg" href="favicon.jpg">
 </head>
 <body>
-    <h1 id="maintainance">Please wait</h1>
-    <h2 id="maintainance">We are currently under maintainance ...</h2>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+        :root{
+            --primary: #fff;
+            --bg-color: rgb(236, 209, 209);
+            --bg-envelope-color: red;
+            --envelope-tab: rgb(236, 44, 44);
+            --envelope-cover: rgb(228, 62, 62);
+            --shadow-color: rgba(0, 0, 0, 0.2);
+            --txt-color: rgb(138, 66, 66);
+            --heart-color: rgb(182, 182, 9);
+        }
+        body{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background: var(--bg-color);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap:0;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            width:450px;
+            max-width: 85%;
+        }
+        .footer {
+            position: absolute;
+            background:rgb(214, 81, 81, 0.5);
+            bottom: 0;
+            left: 0;
+            right: 0;
+            text-align: left;
+            font-family: 'Roboto', 'Inter', sans-serif;
+            color: var(--txt-color);
+            font-size: 12px;
+            padding: 10px;
+        }
+        .footer > li {
+            color: black;
+            text-decoration: none;
+            font-size: 12px;
+            font-family: 'Roboto', 'Inter', sans-serif;
+        }
+
+        #maintainance{
+            translate:0 30vh;
+            color:var(--txt-color);
+            font-family: 'Roboto', 'Inter', sans-serif;
+        }
+        h1{
+            font-size: clamp(2rem, 5vw, 3rem);
+        }
+        h2{
+            font-size: clamp(1rem, 1.8vw, 2rem);
+        }
+    </style>
+    <div class="container">
+        <h1 id="maintainance">Please wait</h1>
+        <h2 id="maintainance">We are currently under maintainance ...</h2>
+    </div>
     <div class="footer">
         <li>Sẽ mở được vào 23h55</li>
     </div>
