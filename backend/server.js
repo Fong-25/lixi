@@ -10,7 +10,10 @@ require('dotenv').config({ path: path.resolve(__dirname, '../.env') });
 const app = express();
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: ['https://lixi2025.onrender.com', 'http://localhost:3000'],
+  credentials: true
+}));
 app.use(express.json());
 
 // MongoDB connection

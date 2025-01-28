@@ -24,7 +24,7 @@ envelope.addEventListener('click', async function(e) {
         // Wait for the animation to finish
         await new Promise(resolve => setTimeout(resolve, 4200));
         // Send data to backend        
-        const response = await fetch('http://localhost:5000/api/money', {
+        const response = await fetch('https://lixi2025.onrender.com/api/money', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
