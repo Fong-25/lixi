@@ -143,3 +143,9 @@ input:focus{
     color:var(--txt-color);
     font-family: 'Roboto', 'Inter', sans-serif;
 }
+h4{
+    color:var(--txt-color);
+    font-family: 'Roboto', 'Inter', sans-serif;
+    position:absolute;
+    bottom:100px
+}
