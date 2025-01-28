@@ -16,6 +16,21 @@ app.use(cors({
 }));
 app.use(express.json());
 
+// Time-gate middleware
+const timeGateMiddleware = (req, res, next) => {
+  // Create date object for GMT+7
+  const bangkokTime = new Date(new Date().toLocaleString('en-US', { timeZone: 'Asia/Bangkok' }));
+  
+  // Set launch time to January 28, 2025, 23:55:00 GMT+7
+  const launchTime = new Date('2025-01-28T23:55:00+07:00');
+
+  if (bangkokTime < launchTime) {
+    // Before launch time - redirect to 404
+    return res.sendFile(path.join(__dirname, '../frontend', '404.html'));
+  }
+  next();
+};
+
 // MongoDB connection
 mongoose.connect(process.env.MONGODB_URI)
   .then(() => console.log('Connected to MongoDB'))
@@ -28,13 +43,13 @@ const Money = require('./money.model');
 // Serve static files (index.js, style.css, etc.) from the 'frontend' directory
 app.use(express.static(path.join(__dirname, '../frontend')));
 
-// Rendering HTML
-app.get('/', (req, res) => {
+// Rendering HTML after time gate
+app.get('/', timeGateMiddleware, (req, res) => {
   res.sendFile(path.join(__dirname, '../frontend', 'index.html'));
 });
 
 // Routes
-app.post('/api/money', async (req, res) => {
+app.post('/api/money', timeGateMiddleware, async (req, res) => {
     try {
       const { name, lucky } = req.body;
       const money = new Money({ name, lucky });
@@ -51,6 +66,7 @@ app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
 
+// Admin route is not time-gated
 app.get('/admin12345', async (req, res) => {
   try {
     const money = await Money.find();
