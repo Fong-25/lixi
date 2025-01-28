@@ -22,15 +22,13 @@ envelope.addEventListener('click', async function(e) {
         greeting.textContent = `${list2[index2]}`;
         amount.textContent = `Mức lì xì: ${lucky}VNĐ`;
         envelope.classList.toggle('flap');
+        // Wait for the animation to finish
         confetti({
-            particleCount: 150,
+            particleCount: 200,
             startVelocity: 30,
             spread: 360,
-            decay:0.9,
-            ticks: 4000
-            }
-        );
-        // Wait for the animation to finish
+            ticks: 5000
+        });
         await new Promise(resolve => setTimeout(resolve, 4200));
         // Send data to backend        
         const response = await fetch('https://lixi2025.onrender.com/api/money', {
