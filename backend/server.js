@@ -24,20 +24,28 @@ mongoose.connect(process.env.MONGODB_URI)
 // Schema
 const Money = require('./money.model');
 
-// Time-gate middleware - apply to ALL routes except /404 and /admin12345
+// Time-gate middleware - apply to ALL routes except /404 and /admin12345 for launching countdown, 28/1/2025 23h55 +7GMT
+// app.use((req, res, next) => {
+//   if (req.path === '/404' || req.path === '/admin12345') {
+//     return next();
+//   }
+
+//   const launchDate = new Date('2025-01-28T23:55:00+07:00');
+//   const now = new Date();
+  
+//   if (now < launchDate) {
+//     return res.redirect('/404');
+//   }
+  
+//   next();
+// });
+
+// Close website from now on
 app.use((req, res, next) => {
   if (req.path === '/404' || req.path === '/admin12345') {
     return next();
   }
-
-  const launchDate = new Date('2025-01-28T23:55:00+07:00');
-  const now = new Date();
-  
-  if (now < launchDate) {
-    return res.redirect('/404');
-  }
-  
-  next();
+  return res.redirect('/404');
 });
 
 // 404 route MUST be before static files
@@ -48,10 +56,10 @@ app.get('/404', (req, res) => {
 // Static files after middleware but before routes
 app.use(express.static(path.join(__dirname, '../frontend')));
 
-// Routes
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '../frontend', 'index.html'));
-});
+// Routes, commented out to close website
+// app.get('/', (req, res) => {
+//   res.sendFile(path.join(__dirname, '../frontend', 'index.html')); 
+// }); 
 
 app.post('/api/money', async (req, res) => {
     try {
@@ -64,13 +72,14 @@ app.post('/api/money', async (req, res) => {
     }
 });
 
+// To see all data
 app.get('/admin12345', async (req, res) => {
-  try {
-    const money = await Money.find();
-    res.send(money);
-  } catch (error) {
-    res.status(500).json({ error: 'Error!!!' });
-  }
+ try {
+   const money = await Money.find();
+   res.send(money);
+ } catch (error) {
+   res.status(500).json({ error: 'Error!!!' });
+ }
 });
 
 const PORT = process.env.PORT || 5000;
